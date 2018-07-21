@@ -34,11 +34,11 @@ namespace CafeTownsendAutomation.Steps
 
         #region When's
 
-        [When(@"I click on the Login button")]
-        public void WhenIClickOnTheLoginButton()
+        [When(@"I click on the '(.*)' button")]
+        public void WhenIClickOnTheLoginButton(string button)
         {
             var loginLogout = ScenarioContext.Current.Get<LoginLogoutPage>();
-            loginLogout.ClickLogin();
+            loginLogout.ClickButton(button);
         }
 
         #endregion
@@ -63,7 +63,15 @@ namespace CafeTownsendAutomation.Steps
         {
             var loginLogout = ScenarioContext.Current.Get<LoginLogoutPage>();
             string errorUI = loginLogout.GetErrorInvalidCredentials();
-            Assert.AreEqual(errorUI, error, "The error of invalid credentials is {0}", errorUI == null ? "not shown" : "don't match");    
+            Assert.AreEqual(errorUI, error, "The error of invalid credentials {0}", errorUI == null ? "is not shown" : "don't match with given");    
+        }
+
+        [Then(@"I see the greeting message '(.*)''(.*)'")]
+        public void ThenISeeTheGreetingMessage(string greeting, string username)
+        {
+            var loginLogout = ScenarioContext.Current.Get<LoginLogoutPage>();
+            string greetingUI = loginLogout.IsGreetingMessage(greeting);
+            Assert.AreEqual(greetingUI, greeting + username, "The greeting message {0}", greetingUI == null ? "is not shown" : "don't match with given");
         }
 
         #endregion

@@ -52,7 +52,7 @@ namespace FundaSearchComponentBE.Tests
 
         public void Quit()
         {
-            _driver.Close();
+            _driver.Quit();
         }
         #endregion
     }
