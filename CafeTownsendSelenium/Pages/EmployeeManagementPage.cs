@@ -13,10 +13,10 @@ using TechTalk.SpecFlow;
 
 namespace CafeTownsendSelenium.Pages
 {
-    public class UserManagementPage : BaseTest
+    public class EmployeeManagementPage : BaseTest
     {
 
-        public UserManagementPage(IWebDriver driver) : base(driver)
+        public EmployeeManagementPage(IWebDriver driver) : base(driver)
         {
             PageFactory.InitElements(_driver, this);
         }
@@ -56,6 +56,9 @@ namespace CafeTownsendSelenium.Pages
         [FindsBy(How = How.ClassName, Using = "bCancel")]
         private IWebElement cancelBtn { get; set; }
 
+        [FindsBy(How = How.XPath, Using = "//ul[@id='employee-list']/li[last()]")]
+        private IWebElement lastEmployee { get; set; }
+
         #endregion
 
         #region Action's
@@ -74,10 +77,13 @@ namespace CafeTownsendSelenium.Pages
                     WaitForElementToAppear(addBtn, 5);
                     Console.WriteLine("Add button {0} disabled", addBtn.GetAttribute("ng-disabled") == "true" ? "is" : "is not (!!!)");
                     break;
+                case "Add":
+                    addBtn.Click();
+                    break;
             }
         }
 
-        public void FillInNewUserData(string firstName, string lastName, string startDate, string email)
+        public void FillInNewEmployeeData(string firstName, string lastName, string startDate, string email)
         {
             firstNameInp.SendKeys(firstName);
             lastNameInp.SendKeys(lastName);
@@ -98,6 +104,18 @@ namespace CafeTownsendSelenium.Pages
         {
             WaitForElementToAppear(editBtn, 5);
             Assert.IsTrue(editBtn.GetAttribute("class").Contains("disabled") & deleteBtn.GetAttribute("class").Contains("disabled") ? true : false);
+        }
+
+        public void IsTheLastEmployeeListedWith(string firstName, string lastName)
+        {
+            WaitForElementToAppear(lastEmployee, 5);
+            Assert.AreEqual(lastEmployee.Text, $"{firstName} {lastName}", "The employee created was not found in the list");
+        }
+
+        public void IsAlertThrownWithText(string alert)
+        {
+            Assert.AreEqual(_driver.SwitchTo().Alert().Text, alert, "Alert text is wrong");
+            _driver.SwitchTo().Alert().Accept();
         }
         #endregion
     }

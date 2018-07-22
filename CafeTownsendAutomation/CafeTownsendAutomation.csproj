@@ -91,10 +91,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\CreateUser.feature.cs">
+    <Compile Include="Features\CreateEmployee.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CreateUser.feature</DependentUpon>
+      <DependentUpon>CreateEmployee.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\LoginLogout.feature.cs">
       <AutoGen>True</AutoGen>
@@ -104,16 +104,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\BaseSteps.cs" />
     <Compile Include="Steps\LoginLogoutSteps.cs" />
-    <Compile Include="Steps\UserManagementSteps.cs" />
+    <Compile Include="Steps\EmployeeManagementSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Features\CreateUser.feature">
+    <None Include="Features\CreateEmployee.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CreateUser.feature.cs</LastGenOutput>
+      <LastGenOutput>CreateEmployee.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\LoginLogout.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
