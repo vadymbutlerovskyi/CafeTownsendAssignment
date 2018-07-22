@@ -17,22 +17,22 @@ namespace CafeTownsendAutomation.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("LoginSteps", Description="\tIn order to login\r\n\tAs a user\r\n\tI want to be able to enter valid username and pa" +
-        "ssword and successfully sign in", SourceFile="Features\\LoginSteps.feature", SourceLine=0)]
-    public partial class LoginStepsFeature
+    [TechTalk.SpecRun.FeatureAttribute("LoginLogoutSteps", Description="\tIn order to login and logout\r\n\tAs a user\r\n\tI want to be able to enter valid user" +
+        "name and password and successfully sign in/out", SourceFile="Features\\LoginLogout.feature", SourceLine=0)]
+    public partial class LoginLogoutStepsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "LoginSteps.feature"
+#line 1 "LoginLogout.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "LoginSteps", "\tIn order to login\r\n\tAs a user\r\n\tI want to be able to enter valid username and pa" +
-                    "ssword and successfully sign in", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "LoginLogoutSteps", "\tIn order to login and logout\r\n\tAs a user\r\n\tI want to be able to enter valid user" +
+                    "name and password and successfully sign in/out", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -67,7 +67,7 @@ namespace CafeTownsendAutomation.Features
         {
             string[] @__tags = new string[] {
                     "smoke",
-                    "login"};
+                    "LoginLogout"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -117,7 +117,7 @@ this.ScenarioSetup(scenarioInfo);
         
         [TechTalk.SpecRun.ScenarioAttribute("Test both invalid and successfull login and logout, Luke", new string[] {
                 "smoke",
-                "login"}, SourceLine=28)]
+                "LoginLogout"}, SourceLine=28)]
         public virtual void TestBothInvalidAndSuccessfullLoginAndLogout_Luke()
         {
 #line 8

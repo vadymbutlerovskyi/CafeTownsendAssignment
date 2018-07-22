@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FundaSearchComponentBE.Tests
@@ -25,7 +26,6 @@ namespace FundaSearchComponentBE.Tests
         }
 
         #region Get
-
         protected List<IWebElement> GetElementsByTag(string tagName)
         {
             return _driver.FindElements(By.TagName(tagName)).ToList();
@@ -35,11 +35,9 @@ namespace FundaSearchComponentBE.Tests
         {
             return _driver.Url;
         }
-
         #endregion
 
         #region Actions
-
         public void GoToUrl(string url)
         {
             _driver.Navigate().GoToUrl(url);
@@ -53,6 +51,35 @@ namespace FundaSearchComponentBE.Tests
         public void Quit()
         {
             _driver.Quit();
+        }
+        #endregion
+
+        #region Wait's
+        public void WaitForElementToAppear(IWebElement element, int secs)
+        {
+            bool result = false;
+            int counter = 0;
+            do
+            {
+                try
+                {
+                    counter++;
+                    result = element.Displayed ? true : false;
+                }
+                catch (NoSuchElementException)
+                {
+                    Thread.Sleep(1000);
+                }
+                if (counter == secs)
+                {
+                    throw new NoSuchElementException(nameof(element));
+                }
+                else if (result == true)
+                {
+                    break;
+                }
+            }
+            while (counter <= secs);
         }
         #endregion
     }

@@ -1,10 +1,10 @@
-﻿Feature: LoginSteps
-	In order to login
+﻿Feature: LoginLogoutSteps
+	In order to login and logout
 	As a user
-	I want to be able to enter valid username and password and successfully sign in
+	I want to be able to enter valid username and password and successfully sign in/out
 
 @smoke
-@login
+@LoginLogout
 Scenario Outline: Test both invalid and successfull login and logout
 	Given I open browser and go to CafeTownsend home page
 	Then I wait for '1' second(s)

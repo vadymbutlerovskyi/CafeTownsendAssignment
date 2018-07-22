@@ -24,10 +24,12 @@ namespace CafeTownsendAutomation.Steps
 
             var loginLogout = new LoginLogoutPage(test._driver);
             var basePage = new BaseTest(test._driver);
+            var userManagement = new UserManagementPage(test._driver);
 
             ScenarioContext.Current.Clear();
             ScenarioContext.Current.Set(loginLogout);
             ScenarioContext.Current.Set(basePage);
+            ScenarioContext.Current.Set(userManagement);
         }
 
         #endregion
