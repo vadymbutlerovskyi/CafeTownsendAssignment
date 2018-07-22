@@ -9,7 +9,9 @@ Scenario Outline: Create a new employee
 	Then I enter '<username>' into the 'username' field
 		And I enter '<password>' into the 'password' field
 	When I click on the Login button
-	Then I click on the Create button
+	Then I see Edit button disabled
+		And I see Delete button disabled
+		And I click on the Create button
 		And I click on the Cancel button
 		And I click on the Create button
 	When I fill in new employee data with the following:
@@ -46,8 +48,10 @@ Scenario Outline: Create a new employee with invalid data
 	| Email      | m@m.com    |
 	Then I click on the Add button
 		And I wait for '3' second(s)
-		And I accept the alert message '<alert>'
-		And I see 'Start date' field invalid
+		And I see the alert message '<alert>'
+	When I 'accept' the alert
+	Then I see 'Start date' field invalid
+		And I see Add button disabled
 	When I fill in new employee data with the following:
 	| field      | value     |
 	| First name | Robo      |
@@ -56,14 +60,16 @@ Scenario Outline: Create a new employee with invalid data
 	| Email      | @mcom     |
 	Then I see 'Start date' field invalid
 		And I see 'Email' field invalid
+		Then I see Add button disabled
 	When I fill in new employee data with the following:
 	| field      | value  |
 	| First name | Robo   |
 	| Last name  | Cop    |
 	| Start date | Today  |
 	| Email      | m@mcom |
+	Then I see Add button disabled
 	#NOTE: This test will fail in purpose as email 'm@mcom' should not be accepted by regex as this email is invalid, but it is
-	Then I click on the Add button
+		And I click on the Add button
 		And I see 'Email' field invalid
 		And I close browser
 

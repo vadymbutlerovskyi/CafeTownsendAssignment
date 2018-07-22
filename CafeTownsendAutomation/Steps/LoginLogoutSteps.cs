@@ -1,4 +1,5 @@
-﻿using CafeTownsendSelenium.Pages;
+﻿using CafeTownsendAutomation.Helpers;
+using CafeTownsendSelenium.Pages;
 using FundaSearchComponentBE.Tests;
 using NUnit.Framework;
 using System;
@@ -25,11 +26,13 @@ namespace CafeTownsendAutomation.Steps
             var loginLogout = new LoginLogoutPage(test._driver);
             var basePage = new BaseTest(test._driver);
             var employeeManagement = new EmployeeManagementPage(test._driver);
+            var extraActions = new ExtraActions(test._driver);
 
             ScenarioContext.Current.Clear();
             ScenarioContext.Current.Set(loginLogout);
             ScenarioContext.Current.Set(basePage);
             ScenarioContext.Current.Set(employeeManagement);
+            ScenarioContext.Current.Set(extraActions);
         }
 
         #endregion

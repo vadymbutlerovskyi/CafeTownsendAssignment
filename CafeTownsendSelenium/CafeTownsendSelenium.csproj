@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ExtraActions.cs" />
     <Compile Include="Pages\LoginLogoutPage.cs" />
     <Compile Include="Pages\EmployeeManagementPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

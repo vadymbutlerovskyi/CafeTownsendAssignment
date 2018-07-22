@@ -17,7 +17,8 @@ namespace FundaSearchComponentAutomation.Steps
         [Then(@"I wait for '(.*)' second\(s\)")]
         public void ThenIWaitForSecond(int seconds)
         {
-            Thread.Sleep(seconds * 1000);
+            var test = ScenarioContext.Current.Get<BaseTest>();
+            test.WaitForSeconds(seconds);
         }
 
         [Then(@"I close browser")]

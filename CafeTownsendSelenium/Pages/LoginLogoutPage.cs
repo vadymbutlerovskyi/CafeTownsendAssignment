@@ -59,7 +59,6 @@ namespace CafeTownsendSelenium.Pages
                     logoutBtn.Click();
                     break;
             }
-            
         }
 
         public void InputIntoTheField(string value, string field)

@@ -1,7 +1,10 @@
-﻿using FundaSearchComponentBE.Tests;
+﻿using CafeTownsendAutomation.Helpers;
+using FundaSearchComponentBE.Tests;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using Protractor;
 using System;
 using System.Collections.Generic;
@@ -15,11 +18,15 @@ namespace CafeTownsendSelenium.Pages
 {
     public class EmployeeManagementPage : BaseTest
     {
-        public bool result;
+        NgWebDriver ngDriver;
+        public static bool result;
+        public static int employeesBefore;
 
         public EmployeeManagementPage(IWebDriver driver) : base(driver)
         {
+            ngDriver = new NgWebDriver(_driver);
             PageFactory.InitElements(_driver, this);
+            ngDriver.WaitForAngular();
         }
 
         public struct Employee
@@ -58,6 +65,9 @@ namespace CafeTownsendSelenium.Pages
 
         [FindsBy(How = How.XPath, Using = "//button[@type='submit'][text()='Update']")]
         private IWebElement updateBtn { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//a[@class='subButton bBack']")]
+        private IWebElement backBtn { get; set; }
         #endregion
 
         #region Delete
@@ -67,6 +77,9 @@ namespace CafeTownsendSelenium.Pages
 
         [FindsBy(How = How.ClassName, Using = "bCancel")]
         private IWebElement cancelBtn { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//ul[@id='employee-list']/li")]
+        private IList<IWebElement> totalEmployees { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//ul[@id='employee-list']/li[last()]")]
         private IWebElement lastEmployee { get; set; }
@@ -83,8 +96,8 @@ namespace CafeTownsendSelenium.Pages
                     cancelBtn.Click();
                     break;
                 case "Create":
-                    AreEditDeleteButtonsDisabled();
-                    WaitForElementToAppear(createBtn, 5);
+                    WaitForElementToAppear(lastEmployee, 5);
+                    employeesBefore = totalEmployees.Count;
                     createBtn.Click();
                     WaitForElementToAppear(addBtn, 5);
                     Console.WriteLine("Add button {0} disabled", addBtn.GetAttribute("ng-disabled") == "true" ? "is" : "is not (!!!)");
@@ -98,7 +111,19 @@ namespace CafeTownsendSelenium.Pages
                 case "Update":
                     updateBtn.Click();
                     break;
+                case "Back":
+                    backBtn.Click();
+                    break;
+                case "Delete":
+                    deleteBtn.Click();
+                    break;
             }
+        }
+
+        public EmployeeManagementPage SelectTheLastEmployee()
+        {
+            lastEmployee.Click();
+            return this;
         }
 
         public void FillInNewEmployeeData(string firstName, string lastName, string startDate, string email)
@@ -108,7 +133,7 @@ namespace CafeTownsendSelenium.Pages
             Employee.startDate = startDate;
             Employee.email = email;
 
-            ClearEmployeeFields();
+            ClearEmployeeFieldsHardly(false);
 
             firstNameInp.SendKeys(firstName);
             lastNameInp.SendKeys(lastName);
@@ -116,27 +141,65 @@ namespace CafeTownsendSelenium.Pages
             emailInp.SendKeys(email);
         }
 
-        public void ClearEmployeeFields()
+        public void ClearEmployeeFieldsHardly(bool hardly)
         {
-            firstNameInp.Clear();
-            lastNameInp.Clear();
-            startDateInp.Clear();
-            emailInp.Clear();
+            if (hardly == false)
+            {
+                firstNameInp.Clear();
+                lastNameInp.Clear();
+                startDateInp.Clear();
+                emailInp.Clear();
+            }
+            else
+            {
+                ExtraActions actions = new ExtraActions(_driver);
+                actions.ClearFieldHardly(firstNameInp)
+                    .ClearFieldHardly(lastNameInp)
+                    .ClearFieldHardly(startDateInp)
+                    .ClearFieldHardly(emailInp);
+            }
         }
         #endregion
 
         #region Bool
-        public void AreEditDeleteButtonsDisabled()
+        public void IsButtonDisabled(string button)
         {
-            WaitForElementToAppear(editBtn, 5);
-            Assert.IsTrue(editBtn.GetAttribute("class").Contains("disabled") & deleteBtn.GetAttribute("class").Contains("disabled") ? true : false);
+            switch (button)
+            {
+                case "Edit":
+                    WaitForElementToAppear(editBtn, 5);
+                    result = editBtn.GetAttribute("class").Contains("disabled") ? true : false;
+                    break;
+                case "Delete":
+                    WaitForElementToAppear(deleteBtn, 5);
+                    result = deleteBtn.GetAttribute("class").Contains("disabled") ? true : false;
+                    break;
+                case "Add":
+                    WaitForElementToAppear(addBtn, 5);
+                    result = addBtn.GetAttribute("ng-disabled").Equals("true") ? true : false;
+                    break;
+                case "Update":
+                    WaitForElementToAppear(updateBtn, 5);
+                    result = updateBtn.GetAttribute("ng-disabled").Equals("true") ? true : false;
+                    break;
+            }
+            Assert.IsTrue(result, "The button \"{0}\" is not disabled.", button);
         }
 
-        public void IsTheLastEmployeeListed()
+        public bool IsTheLastEmployeeListed()
         {
-            WaitForElementToAppear(lastEmployee, 5);
-            Assert.AreEqual(lastEmployee.Text, $"{Employee.firstName} {Employee.lastName}", "The employee created was not found in the list");
-            lastEmployee.Click();
+            WaitForSeconds(5);
+            int totalEmployeesCount = _driver.FindElements(By.XPath("//ul[@id='employee-list']/li")).Count;
+            if (totalEmployeesCount == employeesBefore + 1)
+            {
+                result = lastEmployee.Text.Equals($"{Employee.firstName} {Employee.lastName}") ? true : false;
+            }
+            else if (totalEmployeesCount == employeesBefore - 1) //This case is because employees may remain in the end of the list
+                //and removing each of them automatically results in error so validation of the changed quantity is enough
+            {
+                result = false;
+            }
+            return result;
         }
 
         public void IsAlertThrownWithText(string alert)
@@ -166,6 +229,11 @@ namespace CafeTownsendSelenium.Pages
             Assert.AreEqual(Employee.lastName, lastNameInp.GetAttribute("value"), "The last name input value is not correct");
             Assert.AreEqual(Employee.startDate, startDateInp.GetAttribute("value"), "The start date input value is not correct");
             Assert.AreEqual(Employee.email, emailInp.GetAttribute("value"), "The email input value is not correct");
+        }
+
+        public void IsDeleteAlertThrownWithText(string alert)
+        {
+            Assert.AreEqual(_driver.SwitchTo().Alert().Text, $"{alert}{Employee.firstName} {Employee.lastName}?", "Alert text is wrong");
         }
         #endregion
     }

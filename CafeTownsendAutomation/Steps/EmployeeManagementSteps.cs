@@ -1,5 +1,8 @@
-﻿using CafeTownsendSelenium.Pages;
+﻿using CafeTownsendAutomation.Helpers;
+using CafeTownsendSelenium.Pages;
+using FundaSearchComponentBE.Tests;
 using NUnit.Framework;
+using SpecFlow.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +16,6 @@ namespace CafeTownsendAutomation.Steps
     [Binding]
     public class EmployeeManagementSteps
     {
-        #region Given's
-        #endregion
-
         #region When's
         [When(@"I fill in new employee data with the following:")]
         public void WhenIFillInNewEmployeeDataWithTheFollowing(Table table)
@@ -28,9 +28,41 @@ namespace CafeTownsendAutomation.Steps
             }
             else
             {
-                employeeManagement.FillInNewEmployeeData(newEmployee.FirstName, newEmployee.LastName, newEmployee.StartDate.ToString("yyyy-MM-dd"), newEmployee.Email);
+                var dictionary = TableExtensions.ToDictionary(table);
+                ScenarioContext.Current.Remove("StartDate");
+                ScenarioContext.Current.Add("StartDate", dictionary["Start date"]);
+                string startDate = ScenarioContext.Current.Get<string>("StartDate");
+                employeeManagement.FillInNewEmployeeData(newEmployee.FirstName, newEmployee.LastName, startDate, newEmployee.Email);
             }            
         }
+
+        [When(@"I clear all the employee fields")]
+        public void WhenIClearAllTheEmployeeFields()
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.ClearEmployeeFieldsHardly(true);
+        }
+
+        [When(@"I '(.*)' the alert")]
+        public void WhenITheAlert(string action)
+        {
+            var baseTest = ScenarioContext.Current.Get<BaseTest>();
+            if (action == "accept")
+            {
+                baseTest.AcceptAlert();
+            }
+            else
+            {
+                baseTest.DismissAlert();
+            }
+        }  
+
+        [When(@"I see the alert to confirm delete with message '(.*)'")]
+        public void WhenISeeTheAlertToConfirmDeleteWithMessage(string alert)
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.IsDeleteAlertThrownWithText(alert);
+        }     
         #endregion
 
         #region Then's
@@ -45,14 +77,8 @@ namespace CafeTownsendAutomation.Steps
         public void ThenISeeAndSelectTheNewEmployeeListed()
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            employeeManagement.IsTheLastEmployeeListed();
-        }
-
-        [Then(@"I accept the alert message '(.*)'")]
-        public void ThenIAcceptTheAlertMessage(string alert)
-        {
-            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            employeeManagement.IsAlertThrownWithText(alert);
+            Assert.IsTrue(employeeManagement.IsTheLastEmployeeListed(), "The employee created was not found in the list");
+            employeeManagement.SelectTheLastEmployee();
         }
 
         [Then(@"I see '(.*)' field invalid")]
@@ -62,11 +88,32 @@ namespace CafeTownsendAutomation.Steps
             employeeManagement.IsFieldInvalid(field);
         }
 
-        [Then(@"I see all the employee data updated after edit")]
-        public void ThenISeeAllTheEmployeeDataUpdatedAfterEdit()
+        [Then(@"I see all the employee data is shown correctly")]
+        public void ThenISeeAllTheEmployeeDataIsShownCorrectly()
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
             employeeManagement.IsAllEmployeeDataCorrect();
+        }
+
+        [Then(@"I see (.*) button disabled")]
+        public void ThenISeeButtonDisabled(string button)
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.IsButtonDisabled(button);
+        }
+
+        [Then(@"I see the alert message '(.*)'")]
+        public void ThenISeeTheAlertMessageTBeBlank(string alert)
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.IsAlertThrownWithText(alert);
+        }
+
+        [Then(@"I don't see the deleted employee listed")]
+        public void ThenIDonTSeeTheDeletedEmployeeListed()
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            Assert.IsFalse(employeeManagement.IsTheLastEmployeeListed(), "The employee created was found in the list");
         }
         #endregion
     }

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,11 +53,22 @@ namespace FundaSearchComponentBE.Tests
         {
             _driver.Quit();
         }
+
+        public void AcceptAlert()
+        {
+            _driver.SwitchTo().Alert().Accept();
+        }
+
+        public void DismissAlert()
+        {
+            _driver.SwitchTo().Alert().Dismiss();
+        }
         #endregion
 
         #region Wait's
         public void WaitForElementToAppear(IWebElement element, int secs)
         {
+            //Despite WebDriverWait available, this method allows to pass an IWebElement directly
             bool result = false;
             int counter = 0;
             do
@@ -68,7 +80,7 @@ namespace FundaSearchComponentBE.Tests
                 }
                 catch (NoSuchElementException)
                 {
-                    Thread.Sleep(1000);
+                    _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
                 }
                 if (counter == secs)
                 {
@@ -80,6 +92,16 @@ namespace FundaSearchComponentBE.Tests
                 }
             }
             while (counter <= secs);
+        }
+
+        public void WaitUntilAlertIsVisible(int timeout)
+        {
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeout)).Until(ExpectedConditions.AlertIsPresent());
+        }
+
+        public void WaitForSeconds(int secs)
+        {
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(secs);
         }
         #endregion
     }

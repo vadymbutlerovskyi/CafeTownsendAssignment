@@ -132,7 +132,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 32
   testRunner.And("I click on the Edit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 33
-  testRunner.And("I see all the employee data updated after edit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I see all the employee data is shown correctly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 34
   testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -146,6 +146,166 @@ this.ScenarioSetup(scenarioInfo);
         {
 #line 7
 this.EditAnExistingEmployee("Luke", "Skywalker", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void EditAnExistingEmployeeWithInvalidData(string username, string password, string alert, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "regression",
+                    "EditEmployee"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit an existing employee with invalid data", @__tags);
+#line 42
+this.ScenarioSetup(scenarioInfo);
+#line 43
+ testRunner.Given("I open browser and go to CafeTownsend home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
+ testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 45
+  testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 47
+ testRunner.Then("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "field",
+                        "value"});
+            table3.AddRow(new string[] {
+                        "First name",
+                        "Robo"});
+            table3.AddRow(new string[] {
+                        "Last name",
+                        "Cop"});
+            table3.AddRow(new string[] {
+                        "Start date",
+                        "Today"});
+            table3.AddRow(new string[] {
+                        "Email",
+                        "m@m.com"});
+#line 48
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table3, "When ");
+#line 55
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
+  testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+  testRunner.And("I click on the Edit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "field",
+                        "value"});
+            table4.AddRow(new string[] {
+                        "First name",
+                        "Robo"});
+            table4.AddRow(new string[] {
+                        "Last name",
+                        "Cop"});
+            table4.AddRow(new string[] {
+                        "Start date",
+                        "2000-13-32"});
+            table4.AddRow(new string[] {
+                        "Email",
+                        "m@m.com"});
+#line 58
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table4, "When ");
+#line 65
+ testRunner.Then("I see \'Start date\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 66
+  testRunner.And("I click on the Update button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+  testRunner.And("I wait for \'3\' second(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+  testRunner.And(string.Format("I accept the alert message \'{0}\'", alert), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+  testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Edit an existing employee with invalid data, Luke", new string[] {
+                "regression",
+                "EditEmployee"}, SourceLine=73)]
+        public virtual void EditAnExistingEmployeeWithInvalidData_Luke()
+        {
+#line 42
+this.EditAnExistingEmployeeWithInvalidData("Luke", "Skywalker", "Error trying to create a new employee: {\"start_date\":[\"can\'t be blank\"]})", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void TestingBackButton(string username, string password, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "regression",
+                    "EditEmployee"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Testing back button", @__tags);
+#line 78
+this.ScenarioSetup(scenarioInfo);
+#line 79
+ testRunner.Given("I open browser and go to CafeTownsend home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 80
+ testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 81
+  testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 82
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 83
+ testRunner.Then("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "field",
+                        "value"});
+            table5.AddRow(new string[] {
+                        "First name",
+                        "Robo"});
+            table5.AddRow(new string[] {
+                        "Last name",
+                        "Cop"});
+            table5.AddRow(new string[] {
+                        "Start date",
+                        "Today"});
+            table5.AddRow(new string[] {
+                        "Email",
+                        "m@m.com"});
+#line 84
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table5, "When ");
+#line 91
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 92
+  testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 93
+  testRunner.And("I click on the Edit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 94
+ testRunner.When("I clear all the employee fields", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 95
+ testRunner.Then("I click on the Back button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 100
+  testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 101
+  testRunner.And("I click on the Edit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+  testRunner.And("I see all the employee data is shown correctly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 104
+  testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Testing back button, Luke", new string[] {
+                "regression",
+                "EditEmployee"}, SourceLine=106)]
+        public virtual void TestingBackButton_Luke()
+        {
+#line 78
+this.TestingBackButton("Luke", "Skywalker", ((string[])(null)));
 #line hidden
         }
         

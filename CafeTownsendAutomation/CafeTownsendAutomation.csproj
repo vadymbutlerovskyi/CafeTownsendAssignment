@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateEmployee.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\DeleteEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteEmployee.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\EditEmployee.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,19 +111,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoginLogout.feature</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\TableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\BaseSteps.cs" />
     <Compile Include="Steps\LoginLogoutSteps.cs" />
     <Compile Include="Steps\EmployeeManagementSteps.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Features\CreateEmployee.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CreateEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\DeleteEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteEmployee.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\EditEmployee.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
