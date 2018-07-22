@@ -64,6 +64,7 @@ namespace CafeTownsendSelenium.Pages
 
         public void InputIntoTheField(string value, string field)
         {
+            WaitForElementToAppear(usernameInp, 5);
             if (field == "username")
             {
                 usernameInp.Clear();
@@ -95,6 +96,7 @@ namespace CafeTownsendSelenium.Pages
 
         public string GetErrorInvalidCredentials()
         {
+            WaitForElementToAppear(invalidErr, 5);
             try
             {
                 return invalidErr.Text;
@@ -107,6 +109,7 @@ namespace CafeTownsendSelenium.Pages
 
         public string IsGreetingMessage(string greeting)
         {
+            WaitForElementToAppear(greetingMsg, 5);
             try
             {
                 return greetingMsg.Text;

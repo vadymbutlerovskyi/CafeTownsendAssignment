@@ -15,10 +15,19 @@ namespace CafeTownsendSelenium.Pages
 {
     public class EmployeeManagementPage : BaseTest
     {
+        public bool result;
 
         public EmployeeManagementPage(IWebDriver driver) : base(driver)
         {
             PageFactory.InitElements(_driver, this);
+        }
+
+        public struct Employee
+        {
+            public static string firstName;
+            public static string lastName;
+            public static string startDate;
+            public static string email;
         }
 
         #region PageFactory
@@ -46,6 +55,9 @@ namespace CafeTownsendSelenium.Pages
         #region Edit
         [FindsBy(How = How.Id, Using = "bEdit")]
         private IWebElement editBtn { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//button[@type='submit'][text()='Update']")]
+        private IWebElement updateBtn { get; set; }
         #endregion
 
         #region Delete
@@ -80,22 +92,36 @@ namespace CafeTownsendSelenium.Pages
                 case "Add":
                     addBtn.Click();
                     break;
+                case "Edit":
+                    editBtn.Click();
+                    break;
+                case "Update":
+                    updateBtn.Click();
+                    break;
             }
         }
 
         public void FillInNewEmployeeData(string firstName, string lastName, string startDate, string email)
         {
+            Employee.firstName = firstName;
+            Employee.lastName = lastName;
+            Employee.startDate = startDate;
+            Employee.email = email;
+
+            ClearEmployeeFields();
+
             firstNameInp.SendKeys(firstName);
             lastNameInp.SendKeys(lastName);
-            if (startDate == "Today")
-            {
-                startDateInp.SendKeys(DateTime.Now.Date.ToString("yyyy-MM-dd"));
-            }
-            else
-            {
-                startDateInp.SendKeys(startDate);
-            }
+            startDateInp.SendKeys(startDate);
             emailInp.SendKeys(email);
+        }
+
+        public void ClearEmployeeFields()
+        {
+            firstNameInp.Clear();
+            lastNameInp.Clear();
+            startDateInp.Clear();
+            emailInp.Clear();
         }
         #endregion
 
@@ -106,16 +132,40 @@ namespace CafeTownsendSelenium.Pages
             Assert.IsTrue(editBtn.GetAttribute("class").Contains("disabled") & deleteBtn.GetAttribute("class").Contains("disabled") ? true : false);
         }
 
-        public void IsTheLastEmployeeListedWith(string firstName, string lastName)
+        public void IsTheLastEmployeeListed()
         {
             WaitForElementToAppear(lastEmployee, 5);
-            Assert.AreEqual(lastEmployee.Text, $"{firstName} {lastName}", "The employee created was not found in the list");
+            Assert.AreEqual(lastEmployee.Text, $"{Employee.firstName} {Employee.lastName}", "The employee created was not found in the list");
+            lastEmployee.Click();
         }
 
         public void IsAlertThrownWithText(string alert)
         {
             Assert.AreEqual(_driver.SwitchTo().Alert().Text, alert, "Alert text is wrong");
             _driver.SwitchTo().Alert().Accept();
+        }
+
+        public void IsFieldInvalid(string field)
+        {
+            switch (field)
+            {
+                case "Start date":
+                    result = startDateInp.GetAttribute("class").Contains("invalid") ? true : false;
+                    break;
+                case "Email":
+                    result = emailInp.GetAttribute("class").Contains("invalid") ? true : false;
+                    break;
+            }
+
+            Assert.IsTrue(result, "The field \"{0}\" doens't indicate that it is invalid", field);
+        }
+
+        public void IsAllEmployeeDataCorrect()
+        {
+            Assert.AreEqual(Employee.firstName, firstNameInp.GetAttribute("value"), "The first name input value is not correct");
+            Assert.AreEqual(Employee.lastName, lastNameInp.GetAttribute("value"), "The last name input value is not correct");
+            Assert.AreEqual(Employee.startDate, startDateInp.GetAttribute("value"), "The start date input value is not correct");
+            Assert.AreEqual(Employee.email, emailInp.GetAttribute("value"), "The email input value is not correct");
         }
         #endregion
     }

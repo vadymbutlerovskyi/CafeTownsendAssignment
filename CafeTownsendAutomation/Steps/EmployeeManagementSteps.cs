@@ -13,14 +13,6 @@ namespace CafeTownsendAutomation.Steps
     [Binding]
     public class EmployeeManagementSteps
     {
-        public struct Employee
-        {
-            public static string firstName;
-            public static string lastName;
-            public static string startDate;
-            public static string email;
-        }
-
         #region Given's
         #endregion
 
@@ -28,31 +20,32 @@ namespace CafeTownsendAutomation.Steps
         [When(@"I fill in new employee data with the following:")]
         public void WhenIFillInNewEmployeeDataWithTheFollowing(Table table)
         {
-            dynamic newUser = table.CreateDynamicInstance();
-            Employee.firstName = newUser.FirstName;
-            Employee.lastName = newUser.LastName;
-            Employee.startDate = newUser.StartDate;
-            Employee.email = newUser.Email;
+            dynamic newEmployee = table.CreateDynamicInstance();
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            employeeManagement.FillInNewEmployeeData(Employee.firstName, Employee.lastName, Employee.startDate, Employee.email);
+            if (newEmployee.StartDate.ToString() == "Today")
+            {
+                employeeManagement.FillInNewEmployeeData(newEmployee.FirstName, newEmployee.LastName, DateTime.Now.Date.ToString("yyyy-MM-dd"), newEmployee.Email);
+            }
+            else
+            {
+                employeeManagement.FillInNewEmployeeData(newEmployee.FirstName, newEmployee.LastName, newEmployee.StartDate.ToString("yyyy-MM-dd"), newEmployee.Email);
+            }            
         }
-
         #endregion
 
         #region Then's
-
-        [Then(@"I click on the '(.*)' button")]
+        [Then(@"I click on the (.*) button")]
         public void ThenIClickOnTheButton(string button)
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
             employeeManagement.ClickOnButton(button);
         }
 
-        [Then(@"I see the new user listed")]
-        public void ThenISeeTheNewUserListed()
+        [Then(@"I see and select the new employee listed")]
+        public void ThenISeeAndSelectTheNewEmployeeListed()
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            employeeManagement.IsTheLastEmployeeListedWith(Employee.firstName, Employee.lastName);
+            employeeManagement.IsTheLastEmployeeListed();
         }
 
         [Then(@"I accept the alert message '(.*)'")]
@@ -62,6 +55,19 @@ namespace CafeTownsendAutomation.Steps
             employeeManagement.IsAlertThrownWithText(alert);
         }
 
+        [Then(@"I see '(.*)' field invalid")]
+        public void ThenISeeFieldInvalid(string field)
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.IsFieldInvalid(field);
+        }
+
+        [Then(@"I see all the employee data updated after edit")]
+        public void ThenISeeAllTheEmployeeDataUpdatedAfterEdit()
+        {
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.IsAllEmployeeDataCorrect();
+        }
         #endregion
     }
 }

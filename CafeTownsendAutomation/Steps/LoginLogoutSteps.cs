@@ -36,7 +36,7 @@ namespace CafeTownsendAutomation.Steps
 
         #region When's
 
-        [When(@"I click on the '(.*)' button")]
+        [When(@"I click on the (.*) button")]
         public void WhenIClickOnTheLoginButton(string button)
         {
             var loginLogout = ScenarioContext.Current.Get<LoginLogoutPage>();

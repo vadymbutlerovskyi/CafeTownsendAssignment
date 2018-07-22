@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateEmployee.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\EditEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditEmployee.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\LoginLogout.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,6 +119,10 @@
     <None Include="Features\CreateEmployee.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CreateEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\EditEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EditEmployee.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\LoginLogout.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

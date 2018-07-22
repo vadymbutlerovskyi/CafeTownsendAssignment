@@ -17,8 +17,8 @@ namespace CafeTownsendAutomation.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("CreateUserSteps", Description="\tAs a user\r\n\tI want to be able to create a new employee", SourceFile="Features\\CreateEmployee.feature", SourceLine=0)]
-    public partial class CreateUserStepsFeature
+    [TechTalk.SpecRun.FeatureAttribute("CreateEmployeeSteps", Description="\tAs a user\r\n\tI want to be able to create a new employee", SourceFile="Features\\CreateEmployee.feature", SourceLine=0)]
+    public partial class CreateEmployeeStepsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -30,7 +30,7 @@ namespace CafeTownsendAutomation.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "CreateUserSteps", "\tAs a user\r\n\tI want to be able to create a new employee", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "CreateEmployeeSteps", "\tAs a user\r\n\tI want to be able to create a new employee", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,7 +65,7 @@ namespace CafeTownsendAutomation.Features
         {
             string[] @__tags = new string[] {
                     "regression",
-                    "CreateUser"};
+                    "CreateEmployee"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -76,19 +76,17 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Given("I open browser and go to CafeTownsend home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.Then("I wait for \'1\' second(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
-  testRunner.And(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
   testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.When("I click on the \'Login\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 13
- testRunner.Then("I click on the \'Create\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.And("I click on the Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
-  testRunner.And("I click on the \'Cancel\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
-  testRunner.And("I click on the \'Create\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "field",
@@ -105,13 +103,13 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Email",
                         "m@m.com"});
-#line 16
- testRunner.When("I fill in new user data with the following:", ((string)(null)), table1, "When ");
+#line 15
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table1, "When ");
+#line 22
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
- testRunner.Then("I click on the \'Add\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
-  testRunner.And("I see the new user listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
   testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -119,7 +117,7 @@ this.ScenarioSetup(scenarioInfo);
         
         [TechTalk.SpecRun.ScenarioAttribute("Create a new employee, Luke", new string[] {
                 "regression",
-                "CreateUser"}, SourceLine=28)]
+                "CreateEmployee"}, SourceLine=27)]
         public virtual void CreateANewEmployee_Luke()
         {
 #line 7
@@ -131,26 +129,24 @@ this.CreateANewEmployee("Luke", "Skywalker", ((string[])(null)));
         {
             string[] @__tags = new string[] {
                     "regression",
-                    "CreateUser"};
+                    "CreateEmployee"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new employee with invalid data", @__tags);
-#line 35
+#line 34
 this.ScenarioSetup(scenarioInfo);
-#line 36
+#line 35
  testRunner.Given("I open browser and go to CafeTownsend home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 36
+ testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 37
- testRunner.Then("I wait for \'1\' second(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 38
-  testRunner.And(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
   testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
- testRunner.When("I click on the \'Login\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
- testRunner.Then("I click on the \'Create\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 38
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 39
+ testRunner.Then("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "field",
@@ -167,24 +163,72 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "Email",
                         "m@m.com"});
-#line 42
- testRunner.When("I fill in new user data with the following:", ((string)(null)), table2, "When ");
+#line 40
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table2, "When ");
+#line 47
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 48
+  testRunner.And("I wait for \'3\' second(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 49
- testRunner.Then("I click on the \'Add\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
   testRunner.And(string.Format("I accept the alert message \'{0}\'", alert), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+  testRunner.And("I see \'Start date\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "field",
+                        "value"});
+            table3.AddRow(new string[] {
+                        "First name",
+                        "Robo"});
+            table3.AddRow(new string[] {
+                        "Last name",
+                        "Cop"});
+            table3.AddRow(new string[] {
+                        "Start date",
+                        "7/22/2018"});
+            table3.AddRow(new string[] {
+                        "Email",
+                        "@mcom"});
 #line 51
- testRunner.When("I fill in employee  the", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table3, "When ");
+#line 57
+ testRunner.Then("I see \'Start date\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 58
+  testRunner.And("I see \'Email\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "field",
+                        "value"});
+            table4.AddRow(new string[] {
+                        "First name",
+                        "Robo"});
+            table4.AddRow(new string[] {
+                        "Last name",
+                        "Cop"});
+            table4.AddRow(new string[] {
+                        "Start date",
+                        "Today"});
+            table4.AddRow(new string[] {
+                        "Email",
+                        "m@mcom"});
+#line 59
+ testRunner.When("I fill in new employee data with the following:", ((string)(null)), table4, "When ");
+#line 66
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 67
+  testRunner.And("I see \'Email\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+  testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Create a new employee with invalid data, Luke", new string[] {
                 "regression",
-                "CreateUser"}, SourceLine=54)]
+                "CreateEmployee"}, SourceLine=71)]
         public virtual void CreateANewEmployeeWithInvalidData_Luke()
         {
-#line 35
+#line 34
 this.CreateANewEmployeeWithInvalidData("Luke", "Skywalker", "Error trying to create a new employee: {\"start_date\":[\"can\'t be blank\"]})", ((string[])(null)));
 #line hidden
         }

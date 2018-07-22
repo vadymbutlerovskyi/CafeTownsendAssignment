@@ -72,7 +72,7 @@ namespace FundaSearchComponentBE.Tests
                 }
                 if (counter == secs)
                 {
-                    throw new NoSuchElementException(nameof(element));
+                    throw new NoSuchElementException();
                 }
                 else if (result == true)
                 {
