@@ -11,7 +11,8 @@ in order to test logout the test script definitely needs to login before and thu
 of the tests are apart because in case of failure it will be difficult to understand what was the reason.
 
 ===================================================TEST FRAMEWORK=======================================================================
-The testing suite is written in C# using Selenium with a bit or Protractor, Cucumber(Specflow), SpecRun+ and NUnit in Visual Studio as IDE. I selected this framework because of my current occupation at work. Although, I could have used Java and Eclipse or go for Katalon Studio.
+The testing suite is written in C# using Selenium with a bit or Protractor, Cucumber(Specflow), SpecRun+ and NUnit in Visual Studio as IDE. 
+I selected this framework because of my current occupation at work. Although, I could have used Java and Eclipse or go for Katalon Studio.
 
 ===================================================TEST COVERED=========================================================================
 The covered tests are available in feature files at [your path]\CafeTownsendAutomation\CafeTownsendAutomation\Features.
@@ -92,4 +93,4 @@ status. So it seems like a bug, but at the same time can be a feature. 									
 
 |This was a strange behavior of the website, namely the placement of a new employee in the list. First of all it used to be always in the  |
 |bottom of the list and this is what I was working with for the first time. However, it turned out to place randomly each and every new    |
-|employee and thus I had to refactor the tests. It is needed to say that employees are still placed randomly for the time being.	    |
+|employee and thus I had to refactor the tests. It is needed to say that employees are still placed randomly for the time being.	   |
