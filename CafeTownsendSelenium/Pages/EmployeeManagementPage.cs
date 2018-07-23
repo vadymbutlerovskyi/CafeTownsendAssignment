@@ -214,53 +214,50 @@ namespace CafeTownsendSelenium.Pages
             int n = 1;
             int total;
             do
-                {
+            {
                 total = totalEmployees.Count;
                 for (i = n; i <= total + 1; i++)
                 {
                     try
                     {
                         IWebElement emp = _driver.FindElement(By.XPath($"//ul[@id='employee-list']/li[{i}]"));
-                        if (emp.Text == "1 2")
+                        if (emp.Text == employee)
                         {
-                            Actions action = new Actions(_driver);
-                            action.DoubleClick(emp).Perform();
-                            BaseTest baseTest = new BaseTest(_driver);
-                            WaitForElementToAppear(deleteBtn, 5);
-                            deleteBtn.Click();
-                            WaitForSeconds(2);
-                            baseTest.AcceptAlert();
-                            WaitForElementToAppear(lastEmployee, 5);
-                            WaitForSeconds(5);
-                            n = i;
+                            ProceedWithDelete(emp);
                             break;
                         }
                     }
                     catch (NoSuchElementException)
                     {
                         IWebElement emp = _driver.FindElement(By.XPath($"//ul[@id='employee-list']/li[{--i}]"));
-                        if (emp.Text == "1 2")
+                        if (emp.Text == employee)
                         {
-                            Actions action = new Actions(_driver);
-                            action.DoubleClick(emp).Perform();
-                            BaseTest baseTest = new BaseTest(_driver);
-                            WaitForElementToAppear(deleteBtn, 5);
-                            deleteBtn.Click();
-                            WaitForSeconds(2);
-                            baseTest.AcceptAlert();
-                            WaitForElementToAppear(lastEmployee, 5);
-                            WaitForSeconds(5);
-                            n = i;
+                            ProceedWithDelete(emp);
                             break;
                         }
                         else if (i == total)
                         {
                             break;
                         }
-                    }                   
+                    }
                 }
             }
-            while (i < total);            
+            while (i < total);
+
+
+            void ProceedWithDelete(IWebElement emp)
+            {
+                Actions action = new Actions(_driver);
+                action.DoubleClick(emp).Perform();
+                BaseTest baseTest = new BaseTest(_driver);
+                WaitForElementToAppear(deleteBtn, 5);
+                deleteBtn.Click();
+                WaitForSeconds(2);
+                baseTest.AcceptAlert();
+                WaitForElementToAppear(lastEmployee, 5);
+                WaitForSeconds(5);
+                n = i;
+            }                                  
         }
 
         public void IsAlertThrownWithText(string alert)

@@ -12,8 +12,16 @@ namespace FundaSearchComponentAutomation.Steps
     [Binding]
     public class BaseSteps
     {
-        #region Then's
+        #region When's
+        [When(@"I refresh the page")]
+        public void WhenIRefreshThePage()
+        {
+            var test = ScenarioContext.Current.Get<BaseTest>();
+            test.RefreshPage();
+        }
+        #endregion
 
+        #region Then's
         [Then(@"I wait for '(.*)' second\(s\)")]
         public void ThenIWaitForSecond(int seconds)
         {

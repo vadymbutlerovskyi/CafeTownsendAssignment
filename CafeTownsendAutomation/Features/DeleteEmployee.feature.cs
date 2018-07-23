@@ -124,8 +124,18 @@ this.ScenarioSetup(scenarioInfo);
 #line 30
   testRunner.And("I \'accept\' the alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
+ testRunner.Then("I wait for \'3\' second(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 34
+ testRunner.When("I refresh the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 35
+ testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 36
+  testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
  testRunner.Then("I don\'t see the deleted employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 32
+#line 39
   testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -133,7 +143,7 @@ this.ScenarioSetup(scenarioInfo);
         
         [TechTalk.SpecRun.ScenarioAttribute("Delete an existing employee, Luke", new string[] {
                 "regression",
-                "DeleteEmployee"}, SourceLine=35)]
+                "DeleteEmployee"}, SourceLine=42)]
         public virtual void DeleteAnExistingEmployee_Luke()
         {
 #line 7

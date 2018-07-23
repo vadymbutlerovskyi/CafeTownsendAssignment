@@ -80,7 +80,8 @@ namespace FundaSearchComponentBE.Tests
                 }
                 catch (NoSuchElementException)
                 {
-                    _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+                    Thread.Sleep(1000 * secs);
+                    //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
                 }
                 if (counter == secs)
                 {
@@ -101,7 +102,8 @@ namespace FundaSearchComponentBE.Tests
 
         public void WaitForSeconds(int secs)
         {
-            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(secs);
+            Thread.Sleep(1000 * secs);
+            //_driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(secs);
         }
         #endregion
     }
