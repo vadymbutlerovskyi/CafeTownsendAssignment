@@ -87,7 +87,7 @@ Hereinafter, please read through the details of each defect.
 |by WebDriver. For some reason, the list of employees doubles resulting in real and fakes and when hovering a mouse over a fake employee   |
 |randomly, automatically deletes it. At the same time, manually accepting the alert doesn't lead to this issue. Therefore, needed was to   |
 |make logout and login in order to reload the list and proceed with verification. From time to time the delete failed with error (check the|
-|screenshot available at: [your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\). 						   |
+|screenshot available at [your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\). 						    |
 
 *Defect 5. Test case: "Create a new employee"
 
