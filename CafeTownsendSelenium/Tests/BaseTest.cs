@@ -95,15 +95,11 @@ namespace FundaSearchComponentBE.Tests
             while (counter <= secs);
         }
 
-        public void WaitUntilAlertIsVisible(int timeout)
-        {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeout)).Until(ExpectedConditions.AlertIsPresent());
-        }
-
         public void WaitForSeconds(int secs)
         {
             Thread.Sleep(1000 * secs);
-            //_driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(secs);
+            //Despite this method _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(secs); and others available,
+            //and taking into account the fact that Thread.Sleep is not a good pructice, it worked the best in all the test cases 
         }
         #endregion
     }

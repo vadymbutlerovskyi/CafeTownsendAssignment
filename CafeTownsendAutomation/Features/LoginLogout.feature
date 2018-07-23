@@ -12,7 +12,7 @@ Scenario Outline: Test both invalid and successfull login and logout
 	When I click on the Login button
 	Then I see the greeting message 'Hello ''<username>'
 	When I click on the Logout button
-	When I click on the Login button
+		And I click on the Login button
 	Then I see that 'username' field is required to be filled
 		And I enter 'Invalid' into the 'username' field
 	When I click on the Login button
@@ -20,7 +20,7 @@ Scenario Outline: Test both invalid and successfull login and logout
 		And I enter 'Invalid' into the 'password' field
 	When I click on the Login button
 	Then I see the error message 'Invalid username or password!'
-	Then I close browser
+		And I close browser
 Examples: 
 | username | password  |
 | Luke     | Skywalker |

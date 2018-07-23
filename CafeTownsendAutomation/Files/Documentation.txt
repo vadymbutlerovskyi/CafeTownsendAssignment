@@ -1,0 +1,71 @@
+============================================================================================================================================
+											 D O C U M E N T A T I O N
+============================================================================================================================================
+
+This documentation is to describe the testing suite for http://cafetownsend-angular-rails.herokuapp.com.
+
+===================================================TEST APROACH=============================================================================
+My test approach was based on the maximum coverage with less number of test cases. I believe that some scenarious can be validated
+in combination with others. For instance, the "Test both invalid and successfull login and logout" tests both login and logout because
+in order to test logout the test script definitely needs to login before and thus, test the login. Not to abuse with this approach, some
+of the tests are apart because in case of failure it will be difficult to understand what was the reason.
+
+===================================================TEST FRAMEWORK===========================================================================
+The testing suite is written in C# using Selenium with a bit or Protractor, Cucumber(Specflow), SpecRun+ and NUnit in Visual Studio as IDE. 
+I selected this framework because of my current occupation at work. Although, I could have used Java and Eclipse or go for Katalon Studio.
+
+===================================================TEST COVERED=============================================================================
+The covered tests are available in feature files at [your path]\CafeTownsendAutomation\CafeTownsendAutomation\Features.
+In a nutshell, the following areas were embraces:
+ - Login and Logout;
+ - Create an employee;
+ - Edit an employee;
+ - Delete an employee;
+
+===================================================TEST RESULTS=============================================================================
+Specflow+ was used to generate a test report. The latest one can be found at: 
+[your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\CafeTownsendAutomation_Default_2018-07-23T171711.html. 
+After each run, a new test report will be generated at:
+[your path]/CafeTownsendAutomation\TestResults\c\users\[your user]\source\repos\CafeTownsendAutomation\TestResults
+
+
+
+Note:
+2 of the tests marked as [FAIL ON PURPOSE]. This tag means that there are some defects detected in functionality of the website and that
+is why, the tests are failing by showing it. Brief comments are available in feature file for the first and the second ones of the below 
+mentioned test cases as only those will fail on purpose. The rest stem from the bugs that were considered minor or hard to replicate.
+Hereinafter, please read through the details of each defect.
+
+*Defect 1. Test case: "Create a new employee with invalid data"
+
+|This test fails on purpose because when creating a new employee with email 'm@mcom', the error should be triggered like for '@mcom' or    |
+|'mmcom' and the "Add" button should be disabled not to pass such value, although it is not and that is why the error "The button "Add" is |
+|not disabled. Expected: True But was: False" is thrown. It takes for granted that email 'm@mcom' is invalid and no message will be 	   |	
+|delivered to it. The issue seems to be realted to wrong regex.																			   |
+
+*Defect 2. Test case: "Edit an existing employee with invalid data"
+
+|This test fails on purpose because when editing an existing employee and entering the invalid date '2000-13-32' the Update button is 	   |
+|disabled, but clickable. As a result, despite the value being rejected on the server after the Update button was clicked, there is  	   |
+|no alert unlike when creating a new user with the same date stating that "Error trying to create a new employee: {"start_date":["can't be | 
+|blank"]})". That is why, the error that is indicated in the test report states: "Error: no such alert".								   |
+
+*Defect 3. Test case: "Testing back button"
+|If leaving the step "And I see and select the new employee listed" on line 99 of the feature file uncommented, this test will fail on 	   |
+purpose because after clicking the Back button, the employee is still selected so returning to its edition (by clicking the Edit button)   |
+eventually should keep all the fields blank like right after Clear or whatever was the previous state. However, if a click on this employee|
+is performed, or selected is another employee and afterwards this employee is selected again, then the fields will not save the previous   |
+status. So it seems like a bug, but at the same time can be a feature.																	   |
+
+*Defect 4. Test case: "Delete an existing employee"
+|The page when accepting the delete alert behaves weird (check the video "Failure after Acceptance of the Alert" at 					   |
+[your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\) making it impossible to check if the user was removed or not right away  |
+|by WebDriver. For some reason, the list of employees doubles resulting in real and fakes and when hovering a mouse over a fake employee   |
+|randomly, automatically deletes it. At the same time, manually accepting the alert doesn't lead to this issue. Therefore, needed was to   |
+make logout and login in order to reload the list and proceed with verification. From time to time, the delete failed with error (check the|
+|screenshot available at: [your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\).											   |
+
+*Defect 5. Test case: "Create a new employee"
+|This was a strange behaviour of the website, namely the placement of a new employee in the list. First of all it used to be always in the |
+|bottom of the list and this is what I was working with for the first time. However, it turned out to place randomly each and every new    |
+|employee and thus I had to refactor the tests. It is needed to say that employees are still placed randomly for the time being.		   |

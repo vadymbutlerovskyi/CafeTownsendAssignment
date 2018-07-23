@@ -155,6 +155,12 @@
       <Name>CafeTownsendSelenium</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\CafeTownsendAutomation_Default_2018-07-23T171711.html" />
+    <Content Include="Files\Documentation.txt" />
+    <Content Include="Files\Error while deleting an employee.png" />
+    <Content Include="Files\Failure after Acceptance of the Alert.mp4" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -88,7 +88,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
  testRunner.When("I click on the Logout button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
- testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
  testRunner.Then("I see that \'username\' field is required to be filled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 17
@@ -104,7 +104,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 22
  testRunner.Then("I see the error message \'Invalid username or password!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
- testRunner.Then("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

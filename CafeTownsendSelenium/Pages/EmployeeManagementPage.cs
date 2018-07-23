@@ -250,12 +250,12 @@ namespace CafeTownsendSelenium.Pages
                 Actions action = new Actions(_driver);
                 action.DoubleClick(emp).Perform();
                 BaseTest baseTest = new BaseTest(_driver);
-                WaitForElementToAppear(deleteBtn, 3);
+                WaitForSeconds(2);
                 deleteBtn.Click();
                 WaitForSeconds(2);
                 baseTest.AcceptAlert();
                 WaitForElementToAppear(lastEmployee, 3);
-                WaitForSeconds(5);
+                WaitForSeconds(3);
                 n = i;
             }                                  
         }
