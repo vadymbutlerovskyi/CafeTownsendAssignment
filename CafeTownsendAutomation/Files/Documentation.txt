@@ -2,7 +2,7 @@
 											 D O C U M E N T A T I O N
 ============================================================================================================================================
 
-This documentation is to describe the testing suite for http://cafetownsend-angular-rails.herokuapp.com.
+This documentation is attached and comes to describe the testing suite for http://cafetownsend-angular-rails.herokuapp.com.
 
 ===================================================TEST APROACH=============================================================================
 My test approach was based on the maximum coverage with less number of test cases. I believe that some scenarios can be validated
@@ -30,27 +30,29 @@ After each run, a new test report will be generated at:
 
 =========================================HOW TO SET UP AND RUN AUTOMATED TESTS==============================================================
 *Set up:
+
 Step 1: If missing, install Visual Studio (VS) and in VS Installer tick .Net desktop development and .NET Core cross-platform development;
 Step 2: Open VS and in Tools/Extensions and Updates install "SpecFlow for Visual Studio 2017";
 Step 3: Close VS to initialize installation of SpecFlow. The installation will begin so needed is to finish it;
 Step 4: Clone the repo from: https://github.com/vadymbutlerovskyi/CafeTownsendAssignment and launch the solution CafeTownsendAutomation.sln;
 Step 5: Make sure to have .NET Framework 4.6.2 installed, otherwise get it from: https://www.microsoft.com/net/download/thank-you/net462;
-Step 6: If still questioned in VS about what version is needed for the project to work, choose to get .NET 4.6.2 without updating the project;
+Step 6: If still questioned in VS about what version is needed for the project to work choose to get .NET 4.6.2 without updating the project;
 Step 7: Open Solution Explorer in VS and rebuild each of the projects (CafeTownsendAutomation and CafeTownsendSelenium) separately;
 Step 8: On VS top navigation bar open Build/Build Solution;
 Step 9: Restart VS.
 
 *Run:
+
 Step 1: On VS top navigation bar open Test/Windows/Test Explorer;
 Step 2: On the right hand side, the tests will become available in CafeTownsendAutomation tree-view;
 Step 3: Right click on CafeTownsendAutomation or select individual tests and click on "Run Selected Tests"; 
 
-Note: The SpecFlow+ by default is not activated therefore 10 seconds delay before execution as well as tags filtering limitation may occur. 
+NOTE: The SpecFlow+ by default is not activated therefore 10 seconds delay before execution as well as tags filtering limitation may occur. 
 It is easy to activate with a trial license from: https://specflow.org/plus/request-trial/ and get rid of those for 30 days.
 
-Note: In spite of the fact mentioned hereinabove, the tests are fully working!
+NOTE: In spite of the fact mentioned hereinabove, the tests are fully working!
 
-=======================================================REMARKS=============================================================================
+=====================================================REMARKS===============================================================================
 2 of the tests marked as [FAIL ON PURPOSE]. This tag means that there are some defects detected in functionality of the website and that
 is why, the tests are failing by showing it. Brief comments are available in feature file for the first and the second ones of the below 
 mentioned test cases as only those will fail on purpose. The rest stem from the bugs that were considered minor or hard to replicate.
@@ -71,6 +73,7 @@ Hereinafter, please read through the details of each defect.
 |blank"]})". That is why, the error that is indicated in the test report states: "Error: no such alert".								   |
 
 *Defect 3. Test case: "Testing back button"
+
 |If leaving the step "And I see and select the new employee listed" on line 99 of the feature file uncommented, this test will fail on 	   |
 purpose because after clicking the Back button, the employee is still selected so returning to its edition (by clicking the Edit button)   |
 eventually should keep all the fields blank like right after Clear or whatever was the previous state. However, if a click on this employee|
@@ -78,14 +81,16 @@ is performed, or selected is another employee and afterwards this employee is se
 status. So it seems like a bug, but at the same time can be a feature.																	   |
 
 *Defect 4. Test case: "Delete an existing employee"
+
 |The page when accepting the delete alert behaves weird (check the video "Failure after Acceptance of the Alert" at 					   |
-[your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\) making it impossible to check if the user was removed or not right away  |
+|[your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\) making it impossible to check if the user was removed or not right away |
 |by WebDriver. For some reason, the list of employees doubles resulting in real and fakes and when hovering a mouse over a fake employee   |
 |randomly, automatically deletes it. At the same time, manually accepting the alert doesn't lead to this issue. Therefore, needed was to   |
-make logout and login in order to reload the list and proceed with verification. From time to time, the delete failed with error (check the|
+|make logout and login in order to reload the list and proceed with verification. From time to time the delete failed with error (check the|
 |screenshot available at: [your path]\CafeTownsendAutomation\CafeTownsendAutomation\Files\).											   |
 
 *Defect 5. Test case: "Create a new employee"
-|This was a strange behavior of the website, namely the placement of a new employee in the list. First of all it used to be always in the |
+
+|This was a strange behavior of the website, namely the placement of a new employee in the list. First of all it used to be always in the  |
 |bottom of the list and this is what I was working with for the first time. However, it turned out to place randomly each and every new    |
 |employee and thus I had to refactor the tests. It is needed to say that employees are still placed randomly for the time being.		   |
