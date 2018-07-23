@@ -34,7 +34,6 @@ namespace CafeTownsendAutomation.Steps
             ScenarioContext.Current.Set(employeeManagement);
             ScenarioContext.Current.Set(extraActions);
         }
-
         #endregion
 
         #region When's
@@ -79,6 +78,12 @@ namespace CafeTownsendAutomation.Steps
             Assert.AreEqual(greetingUI, greeting + username, "The greeting message {0}", greetingUI == null ? "is not shown" : "don't match with given");
         }
 
+        [Then(@"I sign in with '(.*)' and '(.*)'")]
+        public void ThenISignInWithAnd(string username, string password)
+        {
+            var loginLogout = ScenarioContext.Current.Get<LoginLogoutPage>();
+            loginLogout.SignInAs(username, password);
+        }
         #endregion
     }
 }

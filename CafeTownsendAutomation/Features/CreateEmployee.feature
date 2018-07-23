@@ -6,10 +6,8 @@
 @CreateEmployee
 Scenario Outline: Create a new employee
 	Given I open browser and go to CafeTownsend home page
-	Then I enter '<username>' into the 'username' field
-		And I enter '<password>' into the 'password' field
-	When I click on the Login button
-	Then I remove all employees such as '<firstname>' plus '<lastname>'
+	Then I sign in with '<username>' and '<password>'
+		And I remove all employees such as '<firstname>' plus '<lastname>'
 		And I see Edit button disabled
 		And I see Delete button disabled
 		And I click on the Create button
@@ -34,19 +32,18 @@ Examples:
 
 @regression
 @CreateEmployee
-Scenario Outline: Create a new employee with invalid data
+@FailOnPurpose
+Scenario Outline: [FAIL ON PURPOSE] Create a new employee with invalid data
 	Given I open browser and go to CafeTownsend home page
-	Then I enter '<username>' into the 'username' field
-		And I enter '<password>' into the 'password' field
-	When I click on the Login button
-	Then I click on the Create button
+	Then I sign in with '<username>' and '<password>'
+		And I click on the Create button
 	When I fill in new employee data with the following:
-	| field      | value      |
-	| First name | Robo       |
-	| Last name  | Cop        |
+	| field      | value       |
+	| First name | <firstname> |
+	| Last name  | <lastname>  |
 	#The custom date format is YYYY-MM-DD or Today as a string
-	| Start date | 2000-13-32 |
-	| Email      | m@m.com    |
+	| Start date | 2000-13-32  |
+	| Email      | m@m.com     |
 	Then I click on the Add button
 		And I wait for '3' second(s)
 		And I see the alert message '<alert>'
@@ -54,26 +51,26 @@ Scenario Outline: Create a new employee with invalid data
 	Then I see 'Start date' field invalid
 		And I see Add button disabled
 	When I fill in new employee data with the following:
-	| field      | value     |
-	| First name | Robo      |
-	| Last name  | Cop       |
-	| Start date | 7/22/2018 |
-	| Email      | @mcom     |
+	| field      | value       |
+	| First name | <firstname> |
+	| Last name  | <lastname>  |
+	| Start date | 7/22/2018   |
+	| Email      | @mcom       |
 	Then I see 'Start date' field invalid
 		And I see 'Email' field invalid
-		Then I see Add button disabled
+		And I see Add button disabled
 	When I fill in new employee data with the following:
-	| field      | value  |
-	| First name | Robo   |
-	| Last name  | Cop    |
-	| Start date | Today  |
-	| Email      | m@mcom |
+	| field      | value       |
+	| First name | <firstname> |
+	| Last name  | <lastname>  |
+	| Start date | Today       |
+	| Email      | m@mcom      |
 	Then I see Add button disabled
-	#NOTE: This test will fail in purpose as email 'm@mcom' should not be accepted by regex as this email is invalid, but it is
+	#NOTE: This test will fail on purpose as email 'm@mcom' should not be accepted by regex as this email is invalid, but it is
 		And I click on the Add button
 		And I see 'Email' field invalid
 		And I close browser
 
 Examples: 
-| username | password  | alert                                                                     |
-| Luke     | Skywalker | Error trying to create a new employee: {"start_date":["can't be blank"]}) |
+| username | password  | alert                                                                     | firstname | lastname |
+| Luke     | Skywalker | Error trying to create a new employee: {"start_date":["can't be blank"]}) | Robo      | Cop      |

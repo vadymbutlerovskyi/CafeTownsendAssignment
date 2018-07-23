@@ -53,9 +53,11 @@ namespace CafeTownsendSelenium.Pages
             switch (button)
             {
                 case "Login":
+                    WaitForElementToAppear(loginBtn, 5);
                     loginBtn.Click();
                     break;
                 case "Logout":
+                    WaitForSeconds(2);
                     logoutBtn.Click();
                     break;
             }
@@ -63,7 +65,7 @@ namespace CafeTownsendSelenium.Pages
 
         public void InputIntoTheField(string value, string field)
         {
-            WaitForElementToAppear(usernameInp, 5);
+            WaitForElementToAppear(usernameInp, 3);
             if (field == "username")
             {
                 usernameInp.Clear();
@@ -74,6 +76,17 @@ namespace CafeTownsendSelenium.Pages
                 passwordInp.Clear();
                 passwordInp.SendKeys(value);
             }
+        }
+
+        public void SignInAs(string username, string password)
+        {
+            WaitForElementToAppear(usernameInp, 3);
+            usernameInp.Clear();
+            usernameInp.SendKeys(username);
+            passwordInp.Clear();
+            passwordInp.SendKeys(password);
+            loginBtn.Click();
+            WaitForElementToAppear(logoutBtn, 3);
         }
         #endregion
 
@@ -95,7 +108,7 @@ namespace CafeTownsendSelenium.Pages
 
         public string GetErrorInvalidCredentials()
         {
-            WaitForElementToAppear(invalidErr, 5);
+            WaitForElementToAppear(invalidErr, 3);
             try
             {
                 return invalidErr.Text;
@@ -108,7 +121,7 @@ namespace CafeTownsendSelenium.Pages
 
         public string IsGreetingMessage(string greeting)
         {
-            WaitForElementToAppear(greetingMsg, 5);
+            WaitForElementToAppear(greetingMsg, 3);
             try
             {
                 return greetingMsg.Text;

@@ -92,14 +92,14 @@ namespace CafeTownsendSelenium.Pages
             switch (button)
             {
                 case "Cancel":
-                    WaitForElementToAppear(cancelBtn, 5);
+                    WaitForElementToAppear(cancelBtn, 3);
                     cancelBtn.Click();
                     break;
                 case "Create":
-                    WaitForElementToAppear(lastEmployee, 5);
+                    WaitForElementToAppear(lastEmployee, 3);
                     employeesBefore = totalEmployees.Count;
                     createBtn.Click();
-                    WaitForElementToAppear(addBtn, 5);
+                    WaitForElementToAppear(addBtn, 3);
                     Console.WriteLine("Add button {0} disabled", addBtn.GetAttribute("ng-disabled") == "true" ? "is" : "is not (!!!)");
                     break;
                 case "Add":
@@ -167,19 +167,19 @@ namespace CafeTownsendSelenium.Pages
             switch (button)
             {
                 case "Edit":
-                    WaitForElementToAppear(editBtn, 5);
+                    WaitForElementToAppear(editBtn, 3);
                     result = editBtn.GetAttribute("class").Contains("disabled") ? true : false;
                     break;
                 case "Delete":
-                    WaitForElementToAppear(deleteBtn, 5);
+                    WaitForElementToAppear(deleteBtn, 3);
                     result = deleteBtn.GetAttribute("class").Contains("disabled") ? true : false;
                     break;
                 case "Add":
-                    WaitForElementToAppear(addBtn, 5);
+                    WaitForElementToAppear(addBtn, 3);
                     result = addBtn.GetAttribute("ng-disabled").Equals("true") ? true : false;
                     break;
                 case "Update":
-                    WaitForElementToAppear(updateBtn, 5);
+                    WaitForElementToAppear(updateBtn, 3);
                     result = updateBtn.GetAttribute("ng-disabled").Equals("true") ? true : false;
                     break;
             }
@@ -188,7 +188,7 @@ namespace CafeTownsendSelenium.Pages
 
         public bool IsEmployeeListed()
         {
-            WaitForElementToAppear(lastEmployee, 5);
+            WaitForElementToAppear(lastEmployee, 3);
             string soughtEmployee = $"{Employee.firstName} {Employee.lastName}";
             foreach (var emp in totalEmployees)
             {
@@ -209,7 +209,7 @@ namespace CafeTownsendSelenium.Pages
         public void RemoveAllEmployees(string employee)
         {
             WaitForSeconds(2);
-            WaitForElementToAppear(lastEmployee, 5);
+            WaitForElementToAppear(lastEmployee, 3);
             int i;
             int n = 1;
             int total;
@@ -250,11 +250,11 @@ namespace CafeTownsendSelenium.Pages
                 Actions action = new Actions(_driver);
                 action.DoubleClick(emp).Perform();
                 BaseTest baseTest = new BaseTest(_driver);
-                WaitForElementToAppear(deleteBtn, 5);
+                WaitForElementToAppear(deleteBtn, 3);
                 deleteBtn.Click();
                 WaitForSeconds(2);
                 baseTest.AcceptAlert();
-                WaitForElementToAppear(lastEmployee, 5);
+                WaitForElementToAppear(lastEmployee, 3);
                 WaitForSeconds(5);
                 n = i;
             }                                  
@@ -263,7 +263,6 @@ namespace CafeTownsendSelenium.Pages
         public void IsAlertThrownWithText(string alert)
         {
             Assert.AreEqual(_driver.SwitchTo().Alert().Text, alert, "Alert text is wrong");
-            _driver.SwitchTo().Alert().Accept();
         }
 
         public void IsFieldInvalid(string field)

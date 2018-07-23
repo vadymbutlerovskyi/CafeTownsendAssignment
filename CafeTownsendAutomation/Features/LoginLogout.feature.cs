@@ -82,7 +82,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
   testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.When("I click on the \'Login\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 13
  testRunner.Then(string.Format("I see the greeting message \'Hello \'\'{0}\'", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 14
@@ -94,7 +94,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 17
   testRunner.And("I enter \'Invalid\' into the \'username\' field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.When("I click on the \'Login\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 19
  testRunner.Then("I see that \'password\' field is required to be filled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20

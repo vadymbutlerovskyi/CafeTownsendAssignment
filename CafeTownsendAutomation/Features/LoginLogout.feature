@@ -9,13 +9,13 @@ Scenario Outline: Test both invalid and successfull login and logout
 	Given I open browser and go to CafeTownsend home page
 	Then I enter '<username>' into the 'username' field
 		And I enter '<password>' into the 'password' field
-	When I click on the 'Login' button
+	When I click on the Login button
 	Then I see the greeting message 'Hello ''<username>'
 	When I click on the Logout button
 	When I click on the Login button
 	Then I see that 'username' field is required to be filled
 		And I enter 'Invalid' into the 'username' field
-	When I click on the 'Login' button
+	When I click on the Login button
 	Then I see that 'password' field is required to be filled
 		And I enter 'Invalid' into the 'password' field
 	When I click on the Login button

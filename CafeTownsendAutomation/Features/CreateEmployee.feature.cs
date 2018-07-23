@@ -76,22 +76,18 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Given("I open browser and go to CafeTownsend home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I sign in with \'{0}\' and \'{1}\'", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
-  testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And(string.Format("I remove all employees such as \'{0}\' plus \'{1}\'", firstname, lastname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
- testRunner.Then(string.Format("I remove all employees such as \'{0}\' plus \'{1}\'", firstname, lastname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 13
   testRunner.And("I see Edit button disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
+#line 12
   testRunner.And("I see Delete button disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 13
   testRunner.And("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
+#line 14
   testRunner.And("I click on the Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 15
   testRunner.And("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -109,13 +105,13 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Email",
                         "m@m.com"});
-#line 18
+#line 16
  testRunner.When("I fill in new employee data with the following:", ((string)(null)), table1, "When ");
-#line 25
+#line 23
  testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 26
+#line 24
   testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 25
   testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -123,7 +119,7 @@ this.ScenarioSetup(scenarioInfo);
         
         [TechTalk.SpecRun.ScenarioAttribute("Create a new employee, Luke", new string[] {
                 "regression",
-                "CreateEmployee"}, SourceLine=30)]
+                "CreateEmployee"}, SourceLine=28)]
         public virtual void CreateANewEmployee_Luke()
         {
 #line 7
@@ -131,57 +127,54 @@ this.CreateANewEmployee("Luke", "Skywalker", "Robo", "Cop", ((string[])(null)));
 #line hidden
         }
         
-        public virtual void CreateANewEmployeeWithInvalidData(string username, string password, string alert, string[] exampleTags)
+        public virtual void FAILONPURPOSECreateANewEmployeeWithInvalidData(string username, string password, string alert, string firstname, string lastname, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression",
-                    "CreateEmployee"};
+                    "CreateEmployee",
+                    "FailOnPurpose"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new employee with invalid data", @__tags);
-#line 37
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[FAIL ON PURPOSE] Create a new employee with invalid data", @__tags);
+#line 36
 this.ScenarioSetup(scenarioInfo);
-#line 38
+#line 37
  testRunner.Given("I open browser and go to CafeTownsend home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 38
+ testRunner.Then(string.Format("I sign in with \'{0}\' and \'{1}\'", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 39
- testRunner.Then(string.Format("I enter \'{0}\' into the \'username\' field", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
-  testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
- testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
- testRunner.Then("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.And("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "field",
                         "value"});
             table2.AddRow(new string[] {
                         "First name",
-                        "Robo"});
+                        string.Format("{0}", firstname)});
             table2.AddRow(new string[] {
                         "Last name",
-                        "Cop"});
+                        string.Format("{0}", lastname)});
             table2.AddRow(new string[] {
                         "Start date",
                         "2000-13-32"});
             table2.AddRow(new string[] {
                         "Email",
                         "m@m.com"});
-#line 43
+#line 40
  testRunner.When("I fill in new employee data with the following:", ((string)(null)), table2, "When ");
-#line 50
+#line 47
  testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 51
+#line 48
   testRunner.And("I wait for \'3\' second(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 49
   testRunner.And(string.Format("I see the alert message \'{0}\'", alert), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 50
  testRunner.When("I \'accept\' the alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
+#line 51
  testRunner.Then("I see \'Start date\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
+#line 52
   testRunner.And("I see Add button disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -189,61 +182,62 @@ this.ScenarioSetup(scenarioInfo);
                         "value"});
             table3.AddRow(new string[] {
                         "First name",
-                        "Robo"});
+                        string.Format("{0}", firstname)});
             table3.AddRow(new string[] {
                         "Last name",
-                        "Cop"});
+                        string.Format("{0}", lastname)});
             table3.AddRow(new string[] {
                         "Start date",
                         "7/22/2018"});
             table3.AddRow(new string[] {
                         "Email",
                         "@mcom"});
-#line 56
+#line 53
  testRunner.When("I fill in new employee data with the following:", ((string)(null)), table3, "When ");
-#line 62
+#line 59
  testRunner.Then("I see \'Start date\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 63
+#line 60
   testRunner.And("I see \'Email\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
-  testRunner.Then("I see Add button disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 61
+  testRunner.And("I see Add button disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "field",
                         "value"});
             table4.AddRow(new string[] {
                         "First name",
-                        "Robo"});
+                        string.Format("{0}", firstname)});
             table4.AddRow(new string[] {
                         "Last name",
-                        "Cop"});
+                        string.Format("{0}", lastname)});
             table4.AddRow(new string[] {
                         "Start date",
                         "Today"});
             table4.AddRow(new string[] {
                         "Email",
                         "m@mcom"});
-#line 65
+#line 62
  testRunner.When("I fill in new employee data with the following:", ((string)(null)), table4, "When ");
-#line 71
+#line 68
  testRunner.Then("I see Add button disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 73
+#line 70
   testRunner.And("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
+#line 71
   testRunner.And("I see \'Email\' field invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 72
   testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Create a new employee with invalid data, Luke", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("[FAIL ON PURPOSE] Create a new employee with invalid data, Luke", new string[] {
                 "regression",
-                "CreateEmployee"}, SourceLine=78)]
-        public virtual void CreateANewEmployeeWithInvalidData_Luke()
+                "CreateEmployee",
+                "FailOnPurpose"}, SourceLine=75)]
+        public virtual void FAILONPURPOSECreateANewEmployeeWithInvalidData_Luke()
         {
-#line 37
-this.CreateANewEmployeeWithInvalidData("Luke", "Skywalker", "Error trying to create a new employee: {\"start_date\":[\"can\'t be blank\"]})", ((string[])(null)));
+#line 36
+this.FAILONPURPOSECreateANewEmployeeWithInvalidData("Luke", "Skywalker", "Error trying to create a new employee: {\"start_date\":[\"can\'t be blank\"]})", "Robo", "Cop", ((string[])(null)));
 #line hidden
         }
         
