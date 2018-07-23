@@ -61,7 +61,7 @@ namespace CafeTownsendAutomation.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void DeleteAnExistingEmployeeFromTheList(string username, string password, string[] exampleTags)
+        public virtual void DeleteAnExistingEmployee(string username, string password, string firstname, string lastname, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression",
@@ -70,7 +70,7 @@ namespace CafeTownsendAutomation.Features
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing employee from the list", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing employee", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -81,61 +81,63 @@ this.ScenarioSetup(scenarioInfo);
   testRunner.And(string.Format("I enter \'{0}\' into the \'password\' field", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
  testRunner.When("I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
- testRunner.Then("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 13
+ testRunner.Then(string.Format("I remove all employees such as \'{0}\' plus \'{1}\'", firstname, lastname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+  testRunner.And("I click on the Create button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "field",
                         "value"});
             table1.AddRow(new string[] {
                         "First name",
-                        "Robo"});
+                        string.Format("{0}", firstname)});
             table1.AddRow(new string[] {
                         "Last name",
-                        "Cop"});
+                        string.Format("{0}", lastname)});
             table1.AddRow(new string[] {
                         "Start date",
                         "Today"});
             table1.AddRow(new string[] {
                         "Email",
                         "m@m.com"});
-#line 13
+#line 15
  testRunner.When("I fill in new employee data with the following:", ((string)(null)), table1, "When ");
-#line 20
- testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
-  testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-  testRunner.And("I click on the Delete button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
- testRunner.When("I see the alert to confirm delete with message \'Are you sure you want to delete \'" +
-                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
-  testRunner.And("I \'dismiss\' the alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
- testRunner.Then("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 26
   testRunner.And("I click on the Delete button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 25
  testRunner.When("I see the alert to confirm delete with message \'Are you sure you want to delete \'" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+  testRunner.And("I \'dismiss\' the alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+ testRunner.Then("I see and select the new employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 28
-  testRunner.And("I \'accept\' the alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I click on the Delete button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
- testRunner.Then("I don\'t see the deleted employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I see the alert to confirm delete with message \'Are you sure you want to delete \'" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
+  testRunner.And("I \'accept\' the alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.Then("I don\'t see the deleted employee listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 32
   testRunner.And("I close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Delete an existing employee from the list, Luke", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Delete an existing employee, Luke", new string[] {
                 "regression",
-                "DeleteEmployee"}, SourceLine=33)]
-        public virtual void DeleteAnExistingEmployeeFromTheList_Luke()
+                "DeleteEmployee"}, SourceLine=35)]
+        public virtual void DeleteAnExistingEmployee_Luke()
         {
 #line 7
-this.DeleteAnExistingEmployeeFromTheList("Luke", "Skywalker", ((string[])(null)));
+this.DeleteAnExistingEmployee("Luke", "Skywalker", "Robo", "Cop", ((string[])(null)));
 #line hidden
         }
         

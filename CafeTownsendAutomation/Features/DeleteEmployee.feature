@@ -4,19 +4,21 @@
 
 @regression
 @DeleteEmployee
-Scenario Outline: Delete an existing employee from the list
+Scenario Outline: Delete an existing employee
 	Given I open browser and go to CafeTownsend home page
 	Then I enter '<username>' into the 'username' field
 		And I enter '<password>' into the 'password' field
 	When I click on the Login button
-	Then I click on the Create button
+	#The step below validates the removal from Edit page as doing so through the via WebDriver results in weird behavior (watch the video)
+	Then I remove all employees such as '<firstname>' plus '<lastname>'
+		And I click on the Create button
 	When I fill in new employee data with the following:
-	| field      | value   |
-	| First name | Robo    |
-	| Last name  | Cop     |
+	| field      | value       |
+	| First name | <firstname> |
+	| Last name  | <lastname>  |
 	#The custom date format is YYYY-MM-DD or Today as a string
-	| Start date | Today   |
-	| Email      | m@m.com |
+	| Start date | Today       |
+	| Email      | m@m.com     |
 	Then I click on the Add button
 		And I see and select the new employee listed
 		And I click on the Delete button
@@ -30,10 +32,6 @@ Scenario Outline: Delete an existing employee from the list
 		And I close browser
 
 Examples: 
-| username | password  |
-| Luke     | Skywalker |
-
-#@regression
-#@DeleteEmployee
-#Scenario Outline: Delete an existing employee from the edit page
+| username | password  | firstname | lastname |
+| Luke     | Skywalker | Robo      | Cop      |
 

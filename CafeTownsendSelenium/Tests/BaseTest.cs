@@ -101,7 +101,7 @@ namespace FundaSearchComponentBE.Tests
 
         public void WaitForSeconds(int secs)
         {
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(secs);
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(secs);
         }
         #endregion
     }

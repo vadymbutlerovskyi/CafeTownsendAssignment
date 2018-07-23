@@ -40,7 +40,7 @@ namespace CafeTownsendAutomation.Steps
         public void WhenIClearAllTheEmployeeFields()
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            employeeManagement.ClearEmployeeFieldsHardly(true);
+            employeeManagement.ClearEmployeeFields(true);
         }
 
         [When(@"I '(.*)' the alert")]
@@ -77,8 +77,7 @@ namespace CafeTownsendAutomation.Steps
         public void ThenISeeAndSelectTheNewEmployeeListed()
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            Assert.IsTrue(employeeManagement.IsTheLastEmployeeListed(), "The employee created was not found in the list");
-            employeeManagement.SelectTheLastEmployee();
+            Assert.IsTrue(employeeManagement.IsEmployeeListed(), "The employee created was not found in the list");
         }
 
         [Then(@"I see '(.*)' field invalid")]
@@ -113,8 +112,17 @@ namespace CafeTownsendAutomation.Steps
         public void ThenIDonTSeeTheDeletedEmployeeListed()
         {
             var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
-            Assert.IsFalse(employeeManagement.IsTheLastEmployeeListed(), "The employee created was found in the list");
+            Assert.IsFalse(employeeManagement.IsEmployeeListed(), "The employee created was found in the list");
         }
+
+        [Then(@"I remove all employees such as '(.*)' plus '(.*)'")]
+        public void ThenIRemoveAllEmployeesSuchAs(string firstname, string lastname)
+        {
+            string employee = firstname + " " + lastname;
+            var employeeManagement = ScenarioContext.Current.Get<EmployeeManagementPage>();
+            employeeManagement.RemoveAllEmployees(employee);
+        }
+
         #endregion
     }
 }

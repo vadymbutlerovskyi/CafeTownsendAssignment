@@ -71,7 +71,7 @@ namespace CafeTownsendSelenium.Pages
         #endregion
 
         #region Delete
-        [FindsBy(How = How.Id, Using = "bDelete")]
+        [FindsBy(How = How.XPath, Using = "//*[@ng-click='deleteEmployee()']")]
         private IWebElement deleteBtn { get; set; }
         #endregion
 
@@ -133,7 +133,7 @@ namespace CafeTownsendSelenium.Pages
             Employee.startDate = startDate;
             Employee.email = email;
 
-            ClearEmployeeFieldsHardly(false);
+            ClearEmployeeFields(false);
 
             firstNameInp.SendKeys(firstName);
             lastNameInp.SendKeys(lastName);
@@ -141,7 +141,7 @@ namespace CafeTownsendSelenium.Pages
             emailInp.SendKeys(email);
         }
 
-        public void ClearEmployeeFieldsHardly(bool hardly)
+        public void ClearEmployeeFields(bool hardly)
         {
             if (hardly == false)
             {
@@ -186,20 +186,81 @@ namespace CafeTownsendSelenium.Pages
             Assert.IsTrue(result, "The button \"{0}\" is not disabled.", button);
         }
 
-        public bool IsTheLastEmployeeListed()
+        public bool IsEmployeeListed()
         {
-            WaitForSeconds(5);
-            int totalEmployeesCount = _driver.FindElements(By.XPath("//ul[@id='employee-list']/li")).Count;
-            if (totalEmployeesCount == employeesBefore + 1)
+            WaitForElementToAppear(lastEmployee, 5);
+            string soughtEmployee = $"{Employee.firstName} {Employee.lastName}";
+            foreach (var emp in totalEmployees)
             {
-                result = lastEmployee.Text.Equals($"{Employee.firstName} {Employee.lastName}") ? true : false;
-            }
-            else if (totalEmployeesCount == employeesBefore - 1) //This case is because employees may remain in the end of the list
-                //and removing each of them automatically results in error so validation of the changed quantity is enough
-            {
-                result = false;
+                if (emp.Text == soughtEmployee)
+                {
+                    result = true;
+                    emp.Click();
+                    break;
+                }
+                else
+                {
+                    result = false;
+                }
             }
             return result;
+        }
+
+        public void RemoveAllEmployees(string employee)
+        {
+            WaitForSeconds(2);
+            WaitForElementToAppear(lastEmployee, 5);
+            int i;
+            int n = 1;
+            int total;
+            do
+                {
+                total = totalEmployees.Count;
+                for (i = n; i <= total + 1; i++)
+                {
+                    try
+                    {
+                        IWebElement emp = _driver.FindElement(By.XPath($"//ul[@id='employee-list']/li[{i}]"));
+                        if (emp.Text == "1 2")
+                        {
+                            Actions action = new Actions(_driver);
+                            action.DoubleClick(emp).Perform();
+                            BaseTest baseTest = new BaseTest(_driver);
+                            WaitForElementToAppear(deleteBtn, 5);
+                            deleteBtn.Click();
+                            WaitForSeconds(2);
+                            baseTest.AcceptAlert();
+                            WaitForElementToAppear(lastEmployee, 5);
+                            WaitForSeconds(5);
+                            n = i;
+                            break;
+                        }
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        IWebElement emp = _driver.FindElement(By.XPath($"//ul[@id='employee-list']/li[{--i}]"));
+                        if (emp.Text == "1 2")
+                        {
+                            Actions action = new Actions(_driver);
+                            action.DoubleClick(emp).Perform();
+                            BaseTest baseTest = new BaseTest(_driver);
+                            WaitForElementToAppear(deleteBtn, 5);
+                            deleteBtn.Click();
+                            WaitForSeconds(2);
+                            baseTest.AcceptAlert();
+                            WaitForElementToAppear(lastEmployee, 5);
+                            WaitForSeconds(5);
+                            n = i;
+                            break;
+                        }
+                        else if (i == total)
+                        {
+                            break;
+                        }
+                    }                   
+                }
+            }
+            while (i < total);            
         }
 
         public void IsAlertThrownWithText(string alert)
