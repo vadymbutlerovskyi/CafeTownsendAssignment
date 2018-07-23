@@ -1,5 +1,5 @@
 ============================================================================================================================================
-											 D O C U M E N T A T I O N
+					D O C U M E N T A T I O N
 ============================================================================================================================================
 
 This documentation is attached and comes to describe the testing suite for http://cafetownsend-angular-rails.herokuapp.com.
@@ -63,14 +63,14 @@ Hereinafter, please read through the details of each defect.
 |This test fails on purpose because when creating a new employee with email 'm@mcom', the error should be triggered like for '@mcom' or    |
 |'mmcom' and the "Add" button should be disabled not to pass such value, although it is not and that is why the error "The button "Add" is |
 |not disabled. Expected: True But was: False" is thrown. It takes for granted that email 'm@mcom' is invalid and no message will be 	   |	
-|delivered to it. The issue seems to be related to wrong regex.																			   |
+|delivered to it. The issue seems to be related to wrong regex.	|
 
 *Defect 2. Test case: "Edit an existing employee with invalid data"
 
 |This test fails on purpose because when editing an existing employee and entering the invalid date '2000-13-32' the Update button is 	   |
 |disabled, but clickable. As a result, despite the value being rejected on the server after the Update button was clicked, there is  	   |
 |no alert unlike when creating a new user with the same date stating that "Error trying to create a new employee: {"start_date":["can't be | 
-|blank"]})". That is why, the error that is indicated in the test report states: "Error: no such alert".								   |
+|blank"]})". That is why, the error that is indicated in the test report states: "Error: no such alert".|
 
 *Defect 3. Test case: "Testing back button"
 
@@ -93,4 +93,4 @@ status. So it seems like a bug, but at the same time can be a feature.										
 
 |This was a strange behavior of the website, namely the placement of a new employee in the list. First of all it used to be always in the  |
 |bottom of the list and this is what I was working with for the first time. However, it turned out to place randomly each and every new    |
-|employee and thus I had to refactor the tests. It is needed to say that employees are still placed randomly for the time being.		   |
+|employee and thus I had to refactor the tests. It is needed to say that employees are still placed randomly for the time being.|
