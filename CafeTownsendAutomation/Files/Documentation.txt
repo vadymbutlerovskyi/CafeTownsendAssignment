@@ -75,10 +75,10 @@ Hereinafter, please read through the details of each defect.
 *Defect 3. Test case: "Testing back button"
 
 |If leaving the step "And I see and select the new employee listed" on line 99 of the feature file uncommented, this test will fail on 	   |
-|purpose because after clicking the Back button, the employee is still selected so returning to its edition (by clicking the Edit button)   |
+|purpose because after clicking the Back button, the employee is still selected so returning to its edition (by clicking the Edit button) |
 |eventually should keep all the fields blank like right after Clear or whatever was the previous state. However, if a click on this employee|
-|is performed, or selected is another employee and afterwards this employee is selected again, then the fields will not save the previous   |
-|status. So it seems like a bug, but at the same time can be a feature. 									   |
+|is performed, or selected is another employee and afterwards this employee is selected again, then the fields will not save the previous|
+|status. So it seems like a bug, but at the same time can be a feature. 								   |
 
 *Defect 4. Test case: "Delete an existing employee"
 
